@@ -743,7 +743,7 @@ for (const box of document.querySelectorAll('.mixer')) {
   const mixer = new Mixer();
   mixers.push({ mixer, comic: box.closest('.comic') });
   onLap.push(() => { if (mixer.playing) mixer.reroll(); });
-  const play = box.querySelector('.mix-play'), again = box.querySelector('.mix-again'), state = box.querySelector('.mix-state');
+  const play = box.querySelector('.mix-play'), state = box.querySelector('.mix-state');
   const intro = state.textContent;
   play.addEventListener('click', async () => {
     if (mixer.playing) {
@@ -757,7 +757,6 @@ for (const box of document.querySelectorAll('.mixer')) {
     if (!mixer.bufs) state.textContent = '現場算四軌中…';
     await mixer.start();
     play.disabled = false;
-    again.disabled = false;
     box.classList.add('playing');
     play.textContent = '■ 停';
     play.setAttribute('aria-pressed', 'true');
@@ -766,12 +765,6 @@ for (const box of document.querySelectorAll('.mixer')) {
   for (const b of box.querySelectorAll('[data-layer]')) {
     b.addEventListener('click', () => b.setAttribute('aria-pressed', mixer.toggle(b.dataset.layer)));
   }
-  again.addEventListener('click', async () => {
-    again.disabled = true;
-    const wait = await mixer.reroll();
-    state.textContent = '新的旋律算好了，下一小節換上。';
-    setTimeout(() => { again.disabled = false; state.textContent = intro; }, wait * 1000);
-  });
 }
 
 // 一疊作品：最上面那張翻走，排到最底下
