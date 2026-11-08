@@ -1,0 +1,9 @@
+# 只上線網站本身；原稿、工具、筆記留在本機
+/*
+!/index.html
+!/app.js
+!/style.css
+!/img/
+!/font/
+!/.nojekyll
+!/.gitignore
