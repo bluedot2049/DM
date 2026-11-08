@@ -913,15 +913,16 @@ function shift(move) {
   const d = anchor.getBoundingClientRect().top - before;
   if (d) scrollBy(0, d);
 }
+// 留四個畫面高的餘裕：手機一甩好幾個畫面，搬區塊要等停下來才做（見下面 settle），中間不能先捲到底
 function recycle() {
-  const room = innerHeight * 1.3;
-  for (let i = 0; i < 4; i++) {
+  const room = innerHeight * 4;
+  for (let i = 0; i < 8; i++) {
     const below = document.documentElement.scrollHeight - scrollY - innerHeight;
     const first = loop.firstElementChild;
     if (below > room || first.getBoundingClientRect().bottom > 0) break;
     shift(() => loop.append(first));
   }
-  for (let i = 0; started && i < 4; i++) {
+  for (let i = 0; started && i < 8; i++) {
     const last = loop.lastElementChild;
     if (scrollY > room || last.getBoundingClientRect().top < innerHeight) break;
     shift(() => loop.prepend(last));
@@ -1002,6 +1003,19 @@ function spinTurns() {
   }
 }
 
+let touching = false, idle = 0;
+function settle() {
+  clearTimeout(idle);
+  idle = setTimeout(() => {
+    if (touching) return;   // 放手時會再叫一次
+    recycle();
+    lastY = scrollY;
+    mark();
+  }, 220);
+}
+addEventListener('touchstart', () => { touching = true; }, { passive: true });
+for (const t of ['touchend', 'touchcancel']) addEventListener(t, () => { touching = false; settle(); }, { passive: true });
+
 let ticking = false;
 function onScroll() {
   if (ticking) return;
@@ -1010,7 +1024,11 @@ function onScroll() {
     ticking = false;
     if (scrollY !== lastY) down = scrollY > lastY;
     if (scrollY > 0) started = true;
-    recycle();
+    // 手指還在螢幕上、或甩出去還在滑的時候改捲動位置，iPhone 會跟它打架，畫面就跳。
+    // 所以平常等停下來才搬；只有真的快捲到頭（剩不到一個畫面）才當場搬。
+    const below = document.documentElement.scrollHeight - scrollY - innerHeight;
+    if ((down && below < innerHeight) || (!down && started && scrollY < innerHeight)) recycle();
+    else settle();
     spinTurns();
     musicLevel();
     mark();
