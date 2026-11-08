@@ -154,6 +154,8 @@ section, .hero { max-width: 1080px; margin: 0 auto; padding: 72px var(--gut); }
 .hero-name { font-size: 28px; font-weight: 900; margin-top: 22px; letter-spacing: .14em; }
 .hero-studio { display: flex; align-items: center; gap: 8px; margin: 2px 0 20px; font-size: 17px; font-weight: 500; color: var(--soft); letter-spacing: .06em; }
 .hero-studio img { width: 30px; height: 30px; }
+.name-en { margin-left: .55em; font-weight: 700; letter-spacing: .06em; }
+.contact-who .name-en { display: inline; font-size: inherit; color: inherit; }
 .hero-mail { display: block; margin-top: 2px; font-size: 17px; font-weight: 500; letter-spacing: .04em; color: var(--soft); text-decoration: none; }
 .hero-mail:hover { text-decoration: underline; }
 /* 設計框住美術、音樂、工程：「設計」反黑貼在框的左上角 */
@@ -552,6 +554,9 @@ details summary { cursor: pointer; font-size: 16px; font-weight: 500; }
 .modes div { display: grid; gap: 2px; padding: 10px 12px; border: 2.5px solid var(--ink); background: var(--paper); }
 .modes b { font-size: 18px; font-weight: 900; }
 .modes span { font-size: 16px; line-height: 1.55; }
+/* LINE 前一格：三個黑底方框，大字 */
+.helps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.helps li { display: grid; place-items: center; min-height: 92px; padding: .4em .6em; background: var(--ink); color: var(--paper); font-size: 26px; font-weight: 900; letter-spacing: .1em; line-height: 1.35; text-align: center; }
 /* 收尾：漫畫裡的手機，螢幕就是 LINE QR 碼（電腦上掃、手機上點） */
 .when-qr { justify-items: center; }
 .qr-phone {
@@ -582,6 +587,9 @@ details summary { cursor: pointer; font-size: 16px; font-weight: 500; }
   .hub-team li:nth-child(6) { grid-area: 3 / 1; } .hub-team li:nth-child(7) { grid-area: 3 / 2; } .hub-team li:nth-child(8) { grid-area: 3 / 3; }
   .hub-team li:nth-child(4), .hub-team li:nth-child(5) { align-self: center; }
   .modes { grid-template-columns: 1fr 1fr; }
+  .when .when-help { grid-column: 1 / -1; min-height: 0; }
+  .helps { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .helps li { min-height: 140px; font-size: 28px; letter-spacing: .06em; white-space: nowrap; }
   .when-qr { grid-column: 1 / -1; grid-template-columns: auto auto; justify-content: center; align-items: center; gap: 56px; }
   .when-qr .line { justify-self: auto; }
 }
@@ -590,15 +598,19 @@ details summary { cursor: pointer; font-size: 16px; font-weight: 500; }
 .copy { font-size: 15px; margin-top: 28px; color: var(--soft); }
 
 @media (max-width: 819px) {
+  /* 手機：連續都是我在右邊時，隔一格換到左邊（.flip），人鏡像轉向對話框，排成左右左右 */
+  .line.me.flip { flex-direction: row-reverse; }
+  .line.me.flip .face { transform: scaleX(-1); }
   /* 手機：名字收起來（開場就有），五顆鍵排滿一排，圖示在上、字在下 */
   .bar-name { display: none; }
   .hud { flex: 1; justify-content: space-between; gap: 6px; }
   .hud-btn { flex: 1; flex-direction: column; gap: 2px; padding: 6px 2px 5px; font-size: 14px; letter-spacing: 0; }
     .block { scroll-margin-top: 78px; }
   /* 手機：一段一段分開一點，對話、漫畫格、作品之間多留呼吸，看起來像分好的段落 */
-  .chat { gap: 24px; margin-top: 40px; }
+  section { padding-top: 92px; padding-bottom: 92px; }
+  .chat { gap: 32px; margin-top: 44px; }
   .eyebrow + .chat { margin-top: 0; }
-  .steps { gap: 28px; margin: 40px 0 12px; }
+  .steps { gap: 36px; margin: 44px 0 12px; }
   .step { gap: 14px; }
   .toolbox { margin-top: 48px; }
   .case { gap: 32px; }
@@ -606,13 +618,18 @@ details summary { cursor: pointer; font-size: 16px; font-weight: 500; }
   .ingame > .one { margin: 40px 0 20px; }
   .soul { margin-top: 56px; }
   .tools { gap: 28px; margin-top: 32px; }
-  .comic { gap: 26px; margin-top: 40px; }
+  /* 04 每個用途是一組（問＋答），組和組之間明顯拉開，組裡兩格靠近一點 */
+  .comic { gap: 22px; margin-top: 64px; }
+  .eyebrow + .comic { margin-top: 36px; }
+  .panel { padding: 24px 16px; }
+  .answer { gap: 22px; }
   .game { margin-top: 48px; }
-  .roles { gap: 28px; margin-top: 40px; }
+  .roles { gap: 40px; margin-top: 44px; }
   .role { gap: 12px; }
   .awards { margin-top: 32px; }
   .sub { margin-top: 72px; }
-  .when { gap: 26px; margin-top: 40px; }
+  .when { gap: 40px; margin-top: 44px; }
+  .when .panel { gap: 20px; }
   .turn { margin: 84px 0; }
 }
 
