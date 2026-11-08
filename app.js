@@ -901,6 +901,9 @@ const loop = document.getElementById('loop');
 const bar = document.querySelector('.bar');
 const blockAt = (y) => [...loop.children].find((b) => { const r = b.getBoundingClientRect(); return r.top <= y && r.bottom > y; });
 history.scrollRestoration = 'manual';
+// 剛打開時頁首一定是開場主標題：使用者自己往下捲之前，上面不先塞區塊
+// （先塞的話，上面的圖片後來才載入會把開場往下推，手機上就會看到「第 2 圈」那段）
+let started = false;
 
 // 搬之前記住畫面上那一區在哪，搬完把它擺回原位（瀏覽器自己補過的話差值就是 0）
 function shift(move) {
@@ -918,12 +921,27 @@ function recycle() {
     if (below > room || first.getBoundingClientRect().bottom > 0) break;
     shift(() => loop.append(first));
   }
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; started && i < 4; i++) {
     const last = loop.lastElementChild;
     if (scrollY > room || last.getBoundingClientRect().top < innerHeight) break;
     shift(() => loop.prepend(last));
   }
 }
+
+// 上面看不到的區塊長高或變矮（延遲載入的圖到了、小人重長…），捲動位置跟著補，眼前的東西才不會被推走。
+// #loop 關了瀏覽器自己的 overflow-anchor（跟搬區塊打架），所以這裡自己補。搬區塊不改大小，不會觸發。
+const heights = new WeakMap();
+const sizeWatch = new ResizeObserver((entries) => {
+  let d = 0;
+  for (const e of entries) {
+    const b = e.target, h = b.offsetHeight, old = heights.get(b);
+    heights.set(b, h);
+    if (old === undefined || h === old) continue;
+    if (b.getBoundingClientRect().bottom - (h - old) <= 0) d += h - old;   // 變化前整塊都在畫面上方
+  }
+  if (d) { scrollBy(0, d); lastY = scrollY; }
+});
+for (const b of loop.children) sizeWatch.observe(b);
 
 // 第幾圈：往下捲進接縫算一圈，該長的重新長
 const seam = loop.querySelector('.seam');
@@ -953,6 +971,7 @@ function mark() {
 function go(id) {
   const t = document.getElementById(id);
   if (!t) return;
+  started = true;
   t.scrollIntoView({ block: 'start' });
   recycle();
   t.scrollIntoView({ block: 'start' });   // 前後搬過區塊，再對一次
@@ -990,6 +1009,7 @@ function onScroll() {
   requestAnimationFrame(() => {
     ticking = false;
     if (scrollY !== lastY) down = scrollY > lastY;
+    if (scrollY > 0) started = true;
     recycle();
     spinTurns();
     musicLevel();
@@ -999,7 +1019,8 @@ function onScroll() {
 }
 addEventListener('scroll', onScroll, { passive: true });
 addEventListener('resize', onScroll);
-addEventListener('load', onScroll);
+addEventListener('load', () => { if (!started) scrollTo(0, 0); onScroll(); });
+scrollTo(0, 0);
 recycle();
 spinTurns();
 mark();

@@ -314,7 +314,7 @@ section, .hero { max-width: 1080px; margin: 0 auto; padding: 72px var(--gut); }
 .shot img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border: 2.5px solid var(--ink); box-shadow: 4px 5px 0 var(--ink); }
 .shot figcaption { margin-top: 8px; font-size: 15px; color: var(--soft); }
 .soul { display: grid; gap: 22px; margin-top: 40px; padding: 18px; background: #0f0d1a; color: #efe4cf; border: 2.5px solid var(--ink); box-shadow: 5px 6px 0 var(--ink); }
-.soul img { width: 100%; max-width: 420px; justify-self: center; }
+.soul img { width: 100%; height: auto; max-width: 420px; justify-self: center; }
 .soul-text { display: grid; gap: 14px; align-content: center; }
 .soul-text .label { justify-self: start; background: #e8b86a; color: #0f0d1a; }
 .soul-text p { font-size: 16px; }
