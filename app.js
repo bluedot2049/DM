@@ -454,6 +454,27 @@ async function renderLayer(name) {
   return loop;
 }
 
+// iPhone 開靜音鍵時 Web Audio 會被消音（<audio> 不會）。iOS 17+ 直接把音訊類型設成「播放」；
+// 舊版本靠一段一直循環的無聲 <audio>，讓整頁改走媒體播放的音量
+let silent;
+function unmute(on) {
+  if (navigator.audioSession) { if (on) navigator.audioSession.type = 'playback'; return; }
+  if (!/iPhone|iPad|iPod/.test(navigator.userAgent) && !(navigator.maxTouchPoints > 1 && /Mac/.test(navigator.userAgent))) return;
+  if (!silent) {
+    // 0.5 秒 8kHz 8-bit 無聲 WAV
+    const n = 4000, b = new Uint8Array(44 + n), v = new DataView(b.buffer);
+    const str = (o, t) => [...t].forEach((c, i) => (b[o + i] = c.charCodeAt(0)));
+    str(0, 'RIFF'); v.setUint32(4, 36 + n, true); str(8, 'WAVEfmt ');
+    v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, 8000, true); v.setUint32(28, 8000, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true);
+    str(36, 'data'); v.setUint32(40, n, true); b.fill(128, 44);
+    silent = new Audio(URL.createObjectURL(new Blob([b], { type: 'audio/wav' })));
+    silent.loop = true;
+    silent.setAttribute('playsinline', '');
+  }
+  if (on) silent.play().catch(() => {}); else silent.pause();
+}
+
 const LAYERS = ['keys', 'bell', 'bass', 'drums', 'vinyl'];
 
 class Mixer {
@@ -463,8 +484,11 @@ class Mixer {
   }
 
   async start() {
+    unmute(true);
     if (!this.ctx) {
       const ctx = (this.ctx = new AudioContext());
+      // iOS 只認按下去那一刻叫的 resume，後面算四軌的 await 之後就不算數了
+      ctx.resume();
       const comp = ctx.createDynamicsCompressor();
       comp.threshold.value = -18; comp.knee.value = 10; comp.ratio.value = 2.5;
       comp.attack.value = 0.02; comp.release.value = 0.25;
@@ -494,7 +518,7 @@ class Mixer {
     if (!this.ctx) return;
     this.master.gain.setTargetAtTime(0, this.ctx.currentTime, 0.05);
     this.playing = false;
-    setTimeout(() => { if (!this.playing) this.ctx.suspend(); }, 300);
+    setTimeout(() => { if (!this.playing) { this.ctx.suspend(); unmute(false); } }, 300);
   }
 
   loop(k, when) {
