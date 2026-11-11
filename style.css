@@ -671,3 +671,23 @@ details summary { cursor: pointer; font-size: 16px; font-weight: 500; }
   .answer > .mixer .mix-layers { display: grid; grid-template-columns: 1.3fr repeat(5, 1fr); gap: 12px; }
   .answer > .mixer .mix-layers button { padding: .8em .4em; font-size: 20px; }
 }
+
+/* ===== 2026/11/11 改版（老闆視角）：開場對話、06 誰適合找我、聯絡之後三步、05 為什麼找你 ===== */
+.hero-chat { display: grid; gap: 14px; }
+/* 06「誰適合找我」：黑框裡大字＋一行說明 */
+.helps li { align-content: center; gap: 6px; }
+.helps li span { font-size: 16px; font-weight: 500; letter-spacing: .04em; line-height: 1.5; white-space: normal; }
+/* 06 收尾：聯絡之後的三步 */
+.next { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; }
+.next li { padding: .15em .7em; border: 2px solid var(--ink); background: var(--card); }
+.next li.arrow { padding: 0; border: 0; background: none; }
+/* 05 結尾「為什麼找你」：跟得獎那行拉開 */
+.chat.why { margin-top: 56px; }
+/* 一句話只在詞組之間換行，不把單一個字掉到下一行 */
+.ph { display: inline-block; }
+@media (max-width: 819px) {
+  .hero-chat { gap: 28px; margin-top: 12px; }
+  .next { flex-direction: column; gap: 4px; }
+  .next li.arrow { rotate: 90deg; line-height: 1; }
+}
+@media (min-width: 820px) { .when-qr .next { grid-column: 1 / -1; } }

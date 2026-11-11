@@ -898,6 +898,7 @@ for (const v of document.querySelectorAll('.role-video')) {
 // 捲到快沒東西時，把最上面看過的那一區搬到最下面（往上捲就反過來），捲動位置跟著補回來，
 // 看起來就是一路接下去。頁面上永遠只有一份：音樂不斷、翻到第幾張也留著。
 const loop = document.getElementById('loop');
+const seam = loop.querySelector('.seam');
 const bar = document.querySelector('.bar');
 const blockAt = (y) => [...loop.children].find((b) => { const r = b.getBoundingClientRect(); return r.top <= y && r.bottom > y; });
 history.scrollRestoration = 'manual';
@@ -915,6 +916,7 @@ function shift(move) {
 }
 // 留四個畫面高的餘裕：手機一甩好幾個畫面，搬區塊要等停下來才做（見下面 settle），中間不能先捲到底
 function recycle() {
+  if (!seam) return;   // 沒有接縫的版本（v2）不循環
   const room = innerHeight * 4;
   for (let i = 0; i < 8; i++) {
     const below = document.documentElement.scrollHeight - scrollY - innerHeight;
@@ -945,9 +947,8 @@ const sizeWatch = new ResizeObserver((entries) => {
 for (const b of loop.children) sizeWatch.observe(b);
 
 // 第幾圈：往下捲進接縫算一圈，該長的重新長
-const seam = loop.querySelector('.seam');
 let lap = 1, lastY = scrollY, down = true;   // down：使用者自己捲的方向，搬區塊補的那一下不算
-new IntersectionObserver(([e]) => {
+if (seam) new IntersectionObserver(([e]) => {
   if (!e.isIntersecting || !down) return;
   lap += 1;
   seam.querySelector('[data-lap]').textContent = lap;
