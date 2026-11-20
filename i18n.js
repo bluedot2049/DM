@@ -277,6 +277,7 @@
     document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hant';
     document.title = TITLE[lang];
     document.querySelector('meta[name="description"]')?.setAttribute('content', DESC[lang]);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', 'https://bluedot2049.github.io/DM/' + (lang === 'en' ? '?lang=en' : ''));
     blocks();
     walk(document.body);
     const btn = document.querySelector('[data-lang-toggle]');
