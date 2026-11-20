@@ -151,6 +151,8 @@ section, .hero { max-width: 1080px; margin: 0 auto; padding: 72px var(--gut); }
 .hero { display: grid; gap: 28px; padding-top: 40px; padding-bottom: 56px; }
 .hero-title { display: grid; justify-items: start; gap: 6px; font-size: clamp(40px, 11vw, 82px); font-weight: 900; letter-spacing: .06em; }
 .hero-title span { background: var(--ink); color: var(--paper); padding: 0 .18em .04em; line-height: 1.2; }
+.hero-role { margin: 14px 0 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: clamp(22px, 5.6vw, 30px); line-height: 1.25; letter-spacing: .02em; }
+.hero-role span { display: block; margin-top: 6px; font-family: 'Noto Sans TC', sans-serif; font-style: normal; font-size: 16px; font-weight: 700; letter-spacing: .1em; color: var(--soft); }
 .hero-name { font-size: 28px; font-weight: 900; margin-top: 22px; letter-spacing: .14em; }
 .hero-studio { display: flex; align-items: center; gap: 8px; margin: 2px 0 20px; font-size: 17px; font-weight: 500; color: var(--soft); letter-spacing: .06em; }
 .hero-studio img { width: 30px; height: 30px; }
@@ -587,6 +589,7 @@ details summary { cursor: pointer; font-size: 16px; font-weight: 500; }
   .hub-team li:nth-child(6) { grid-area: 3 / 1; } .hub-team li:nth-child(7) { grid-area: 3 / 2; } .hub-team li:nth-child(8) { grid-area: 3 / 3; }
   .hub-team li:nth-child(4), .hub-team li:nth-child(5) { align-self: center; }
   .modes { grid-template-columns: 1fr 1fr; }
+  .modes div:nth-child(3) { grid-column: 1 / -1; }
   .when .when-help { grid-column: 1 / -1; min-height: 0; }
   .helps { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .helps li { min-height: 140px; font-size: 28px; letter-spacing: .06em; white-space: nowrap; }
