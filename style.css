@@ -110,6 +110,18 @@ section, .hero { max-width: 1080px; margin: 0 auto; padding: 72px var(--gut); }
 .hud-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 0 var(--ink); }
 .hud-btn:active, .hud-btn.press { transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
 .hud-btn[aria-current="true"] { background: var(--ink); color: var(--paper); }
+/* 中英切換鍵：跟選單同一種按鍵，只有字 */
+.lang-btn { flex: none; padding: 7px 11px 6px; font-family: inherit; cursor: pointer; }
+/* 英文版：拉丁字不需要中文的大字距，長字要能換行 */
+html[lang="en"] .hero-title { font-size: clamp(34px, 9.6vw, 70px); letter-spacing: .01em; }
+@media (min-width: 820px) { html[lang="en"] .hero-title { font-size: clamp(40px, 6.6vw, 70px); } }
+html[lang="en"] .hud-btn { letter-spacing: .02em; }
+html[lang="en"] .hero-role span { letter-spacing: .03em; }
+.hero-role span + span { margin-top: 2px; }
+html[lang="en"] .helps li { white-space: normal; letter-spacing: .02em; }
+html[lang="en"] .cat-pick { grid-template-columns: 3.4em 1fr; }
+html[lang="en"] .book-page { flex-direction: column; align-items: center; }
+html[lang="en"] .book-page p { writing-mode: horizontal-tb; padding-top: .6em; letter-spacing: .02em; font-style: italic; text-align: center; }
 /* 跳到別區：畫面閃一下，像遊戲換場 */
 #loop.warp { animation: warp .28s ease-out; }
 @keyframes warp { from { opacity: .15; transform: translateY(10px); } }
@@ -608,6 +620,9 @@ details summary { cursor: pointer; font-size: 16px; font-weight: 500; }
   .bar-name { display: none; }
   .hud { flex: 1; justify-content: space-between; gap: 6px; }
   .hud-btn { flex: 1; flex-direction: column; gap: 2px; padding: 6px 2px 5px; font-size: 14px; letter-spacing: 0; }
+  /* backdrop-filter 會把 fixed 的切換鍵關在選單裡，手機上改用實色底，切換鍵才浮得到右下角 */
+  .bar { backdrop-filter: none; background: var(--paper); }
+  .lang-btn { position: fixed; right: 12px; bottom: 14px; z-index: 11; padding: 8px 12px 7px; font-size: 15px; }
     .block { scroll-margin-top: 78px; }
   /* 手機：一段一段分開一點，對話、漫畫格、作品之間多留呼吸，看起來像分好的段落 */
   section { padding-top: 92px; padding-bottom: 92px; }

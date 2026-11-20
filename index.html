@@ -3,17 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>吳承恩｜模組化設計師・AI Creative Technologist</title>
-<meta name="description" content="吳承恩，模組化設計師（AI Creative Technologist），讀眼藝術工作室 RAWA。美術、音樂、工程一家做，做成零件和規則，之後加做又快又一致。可遠端：接案、全職、兼職。">
+<title>吳承恩｜模組化設計師・Generative Art & Music Designer</title>
+<meta name="description" content="吳承恩，模組化設計師（Generative Art & Music Designer），讀眼藝術工作室 RAWA，美術、音樂相關經驗 10 年。美術、音樂、工程一家做，做成零件和規則，之後加做又快又一致。可遠端：接案、全職、兼職。">
 <!-- 分享預覽（LINE、FB）：網址要絕對路徑，上線的 repo 名稱定了再改 -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="吳承恩｜模組化設計師・AI Creative Technologist">
+<meta property="og:title" content="吳承恩｜模組化設計師・Generative Art & Music Designer">
 <meta property="og:description" content="案子缺東缺西？美術、音樂、工程，找我一家就好。">
 <meta property="og:url" content="https://bluedot2049.github.io/DM/">
 <meta property="og:image" content="https://bluedot2049.github.io/DM/img/og.jpg?v=20261111">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="en" href="https://bluedot2049.github.io/DM/?lang=en">
 <link rel="icon" href="img/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,6 +46,8 @@
     <a class="hud-btn" href="#work" data-go="work"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.6"/></svg><span>根基</span></a>
     <a class="hud-btn" href="#contact" data-go="contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg><span>聯絡</span></a>
   </div>
+  <!-- 中英切換：電腦上排在選單最後，手機上浮在右下角（選單已經排滿） -->
+  <button class="hud-btn lang-btn" type="button" data-lang-toggle aria-label="Switch to English" lang="en"><span>EN</span></button>
 </nav>
 
 <main id="loop">
@@ -52,8 +55,8 @@
 <header class="hero block" id="top">
   <div class="hero-main">
     <h1 class="hero-title"><span>模組化</span><span>設計師</span></h1>
-    <!-- 給招募方看的一行：英文職稱＋合作形式 -->
-    <p class="hero-role">AI-native Creative Technologist<span>可遠端・接案／全職／兼職</span></p>
+    <!-- 給招募方看的一行：英文職稱＋合作形式（英文版的字在 i18n.js） -->
+    <p class="hero-role">Generative Art &amp; Music Designer<span>美術・音樂相關經驗 10 年</span><span>可遠端・接案／全職／兼職</span></p>
     <p class="hero-name">吳承恩<span class="name-en">Darien</span><a class="hero-mail" href="mailto:bluedot2049@gmail.com">bluedot2049@gmail.com</a></p>
     <p class="hero-studio"><img src="img/rawa-mascot.webp" alt="">讀眼藝術工作室 RAWA { 可開收據 }</p>
     <!-- 美術、音樂、工程三樣都包在「設計」裡 -->
@@ -530,6 +533,7 @@
 <!-- v3 不循環：沒有接縫，main.js 就不搬區塊，捲到聯絡就是底 -->
 </main>
 
+<script defer src="i18n.js"></script>
 <script defer src="app.js"></script>
 </body>
 </html>
