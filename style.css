@@ -709,3 +709,11 @@ details summary { cursor: pointer; font-size: 16px; font-weight: 500; }
   .next li.arrow { rotate: 90deg; line-height: 1; }
 }
 @media (min-width: 820px) { .when-qr .next { grid-column: 1 / -1; } }
+
+/* 書籍設計（伊底帕斯的雙眼）：作品疊底下的大圖，像攤開的設計稿 */
+.book-plates { display: grid; gap: 22px; margin-top: 40px; }
+.plate { margin: 0; }
+.plate img { display: block; width: 100%; height: auto; background: #fbf8f0; border: 2.5px solid var(--ink); box-shadow: 4px 5px 0 var(--ink); }
+.plate.title img { padding: 3% 14%; background: #fff; }
+.plate figcaption { margin-top: 8px; font-size: 15px; color: var(--soft); }
+@media (min-width: 820px) { .book-plates { grid-template-columns: 1fr 1fr; gap: 26px; } .plate.wide { grid-column: 1 / -1; } }

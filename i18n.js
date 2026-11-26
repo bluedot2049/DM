@@ -109,6 +109,20 @@
     '觀光客初來乍到': 'Tourists, just arrived', '朋友拍我': 'My friend shoots me', '我拍朋友': 'I shoot my friend',
     '存檔是一張照片': 'Your save file is a photo',
     '自製工具': 'Tools I built', '譜本設計': 'Score book design',
+    // 03 書籍設計
+    '[伊底帕斯的雙眼] 書籍設計・排版': '[The Eyes of Oedipus] Book design & typesetting',
+    '一本 140 頁的 A5 小說。書名字、封面、裝飾到內文排版，整本做成零件和規則。': 'A 140-page A5 novel. Title lettering, cover, ornaments and body typesetting, all built as parts and rules.',
+    '書名字從筆畫骨架重畫，輸出可進 Illustrator 的向量曲線': 'Title lettering redrawn from stroke skeletons, exported as vector curves that open in Illustrator',
+    '九章各一款章首飾、章節扉頁圓徽、四款牌框，同一套線條規則': 'A head ornament for each of nine chapters, chapter roundels and four card frames, all under one line system',
+    '花草照慕夏、比亞茲萊、杜勒的畫法重畫，不停在「圖示」': 'Flowers and leaves redrawn after Mucha, Beardsley and Dürer, so they read as drawings, not icons',
+    '內文照 W3C《中文排版需求》細排：避頭尾、跨頁齊底、段末不留孤字': 'Body text set to the W3C Chinese Layout Requirements: line-break rules, spreads that end level, no orphan lines',
+    '封面 15 款配色、30 多種網點素材，600 dpi、出血、印刷規格一次備齊': '15 cover colourways, 30+ screentones, 600 dpi with bleed: print-ready from the start',
+    '書名字：從筆畫骨架重畫的明體，頭尾加遊絲': 'Title lettering: a Ming-style face redrawn from stroke skeletons, with hairline swashes',
+    '九章章首飾：一章一個母題，線條粗細只分三級': 'Nine chapter heads: one motif per chapter, only three line weights',
+    '四款牌框：蛇與夜海、帷幕與沙漏、帶刺薔薇、絞繩花環': 'Four card frames: serpent and night sea, curtain and hourglass, thorned rose, braided garland',
+    '章節扉頁圓徽': 'Chapter roundels',
+    '封面配色：同一張封面拆成圖層換色，不重畫': 'Cover colourways: one cover split into layers and recoloured, never redrawn',
+    '花草修正：原版｜只改線（輕重、收尖）｜線加形（不對稱、偏心）': 'Refining the flowers: original | line only (weight, tapering) | line and shape (asymmetry, off-centre)',
     // 04
     '04　用 AI 做的嗎？': '04　Made with AI?',
     '開聲音': 'Sound on', '關聲音': 'Sound off',
@@ -151,6 +165,16 @@
   };
 
   const ATTR = {
+    '伊底帕斯的雙眼封面：英文書名、日月徽章與茛苕葉畫框': 'The Eyes of Oedipus cover: English title, sun and moon medallions, acanthus frame',
+    '全書 140 頁的跨頁縮圖，一章一列，標出插圖頁位': 'All 140 pages as spreads, one chapter per row, with illustration slots marked',
+    '封底畫框三款提案：透雕、簡葉、角花黑底': 'Three back-cover frame options: pierced, simple leaf, corner flowers on black',
+    '漫畫網點素材總覽：圓點、漸層、斜線、砂目、集中線': 'Screentone sheet: dots, gradients, lines, grain, speed lines',
+    '中文書名字：伊底帕斯的雙眼，頭尾帶遊絲': 'Chinese title lettering for The Eyes of Oedipus, with hairline swashes',
+    '九章的章首飾與章號': 'Head ornaments and numerals for nine chapters',
+    '四款塔羅牌框：蛇與夜海、帷幕與沙漏、帶刺薔薇、絞繩花環': 'Four tarot-style frames: serpent and night sea, curtain and hourglass, thorned rose, braided garland',
+    '章節扉頁圓徽：薔薇、鏡子、帷幕、星盤、日出': 'Chapter roundels: rose, mirror, curtain, star dial, sunrise',
+    '同一張封面的五款配色：瓶綠、瓶綠金框、牛血紅金框、墨水藍、墨黑金框': 'Five colourways of one cover: bottle green, green with gold, oxblood with gold, ink blue, ink black with gold',
+    '花草輪廓修改前後：薔薇、水仙、畫框角': 'Flower outlines before and after: rose, narcissus, frame corner',
     '。。。': '…',
     '一排長得都不一樣的小人': 'A row of little figures, each one different',
     '貓頭人貼圖': 'Cat-head sticker',
